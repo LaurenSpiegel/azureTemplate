@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "vmSku": {
-        "value": "Standard_DS2_v2"
+        "value": "Standard_A0"
       },
       "ubuntuOSVersion": {
         "value": "16.04-LTS"
@@ -12,7 +12,7 @@
         "value": "GEN-UNIQUE-32"
       },
       "instanceCount": {
-        "value": 4
+        "value": 1
       },
       "adminUsername": {
         "value": "ubuntu"
