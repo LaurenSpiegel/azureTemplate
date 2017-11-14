@@ -174,10 +174,14 @@
           "virtualMachineProfile": {
             "storageProfile": {
               "osDisk": {
+                "name": "vmsosdisk",
                 "createOption": "FromImage",
-                "caching": "ReadWrite"
-              },
-              "imageReference": "[variables('imageReference')]"
+                "caching": "ReadOnly",
+                "osType": "Linux",
+                "image": {
+                  "uri": "https://vhdstorageb4e215133cae6a.blob.core.windows.net/vhds/osdisk_b4e215133c.vhd"
+                }
+              }
             },
             "osProfile": {
               "computerNamePrefix": "[variables('namingInfix')]",
