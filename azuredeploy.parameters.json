@@ -5,8 +5,8 @@
       "vmSku": {
         "value": "Standard_A0"
       },
-      "ubuntuOSVersion": {
-        "value": "16.04-LTS"
+      "scalityConnectImageURI": {
+        "value": "https://vhdstorageb4e215133cae6a.blob.core.windows.net/vhds/osdisk_b4e215133c.vhd"
       },
       "vmssName": {
         "value": "GEN-UNIQUE-32"

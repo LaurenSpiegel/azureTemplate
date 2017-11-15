@@ -9,15 +9,10 @@
           "description": "Size of VMs in the VM Scale Set."
         }
       },
-      "ubuntuOSVersion": {
+      "scalityConnectImageURI": {
         "type": "string",
-        "defaultValue": "16.04-LTS",
-        "allowedValues": [
-          "14.04.4-LTS",
-          "16.04-LTS"
-        ],
         "metadata": {
-          "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version. Allowed values are: 15.10, 14.04.4-LTS."
+          "description": "The URI for Scality Connect image (vhd)."
         }
       },
       "vmssName": {
@@ -66,13 +61,6 @@
       "nicName": "[concat(variables('namingInfix'), 'nic')]",
       "ipConfigName": "[concat(variables('namingInfix'), 'ipconfig')]",
       "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/loadBalancerFrontEnd')]",
-      "osType": {
-        "publisher": "Canonical",
-        "offer": "UbuntuServer",
-        "sku": "[parameters('ubuntuOSVersion')]",
-        "version": "latest"
-      },
-      "imageReference": "[variables('osType')]",
       "computeApiVersion": "2017-03-30",
       "networkApiVersion": "2017-04-01",
       "storageApiVersion": "2015-06-15",
@@ -200,7 +188,7 @@
           "capacity": "[parameters('instanceCount')]"
         },
         "properties": {
-          "overprovision": "true",
+          "overprovision": true,
           "upgradePolicy": {
             "mode": "Manual"
           },
@@ -212,7 +200,7 @@
                 "caching": "ReadOnly",
                 "osType": "Linux",
                 "image": {
-                  "uri": "https://vhdstorageb4e215133cae6a.blob.core.windows.net/vhds/osdisk_b4e215133c.vhd"
+                  "uri": "[parameters('scalityConnectImageURI')]"
                 }
               }
             },
@@ -226,7 +214,7 @@
                 {
                   "name": "[variables('nicName')]",
                   "properties": {
-                    "primary": "true",
+                    "primary": true,
                     "ipConfigurations": [
                       {
                         "name": "[variables('ipConfigName')]",
