@@ -6,7 +6,7 @@
         "value": "Standard_A0"
       },
       "scalityConnectImageURI": {
-        "value": "scalityEnterpriseTest"
+        "value": ""
       },
       "vmssName": {
         "value": "GEN-UNIQUE-33"

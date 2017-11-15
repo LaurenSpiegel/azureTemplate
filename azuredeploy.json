@@ -195,11 +195,13 @@
           "virtualMachineProfile": {
             "storageProfile": {
               "osDisk": {
+                "name": "vmsosdisk",
                 "createOption": "FromImage",
-                "caching": "ReadOnly"
-              },
-              "imageReference": {
-                "id": "/subscriptions/ddddcb62-904d-4e8a-80ed-f91cdc1685f7/resourceGroups/jesusvmtest/providers/Microsoft.Compute/images/scalityEnterpriseTest"
+                "caching": "ReadOnly",
+                "osType": "Linux",
+                "image": {
+                    "uri": "[parameters('scalityConnectImageURI')]"
+                }
               }
             },
             "osProfile": {
@@ -242,4 +244,3 @@
       }
     ]
   }
-  
