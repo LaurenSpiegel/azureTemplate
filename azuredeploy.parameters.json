@@ -6,7 +6,7 @@
         "value": "Standard_A0"
       },
       "scalityConnectImageURI": {
-        "value": "https://vhdstorageb4e215133cae6a.blob.core.windows.net/vhds/osdisk_b4e215133c.vhd"
+        "value": "https://eedeploymentimage.blob.core.windows.net/vhds/osdisk_b4e215133c.vhd"
       },
       "vmssName": {
         "value": "GEN-UNIQUE-32"

@@ -129,7 +129,7 @@
                 "name": "testrule",
                 "properties": {
                     "frontendIPConfiguration": {
-                        "id": "LoadBalancerFrontEnd"
+                        "id": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]"
                     },
                     "frontendPort": 80,
                     "backendPort": 8000,
@@ -138,10 +138,10 @@
                     "protocol": "Tcp",
                     "loadDistribution": "Default",
                     "backendAddressPool": {
-                        "id": "[variables('bePoolName')]"
+                        "id": "[concat(variables('lbID'), '/backendAddressPools/', variables('bePoolName'))]"
                     },
                     "probe": {
-                        "id": "testProbe"
+                        "id": "[concat(variables('lbID'), '/probes/', 'testProbe')]"
                     }
                 }
             }
@@ -195,14 +195,10 @@
           "virtualMachineProfile": {
             "storageProfile": {
               "osDisk": {
-                "name": "vmsosdisk",
                 "createOption": "FromImage",
-                "caching": "ReadOnly",
-                "osType": "Linux",
-                "image": {
-                  "uri": "[parameters('scalityConnectImageURI')]"
-                }
-              }
+                "caching": "ReadOnly"
+              },
+              "imageReference": "[parameters('scalityConnectImageURI')]"
             },
             "osProfile": {
               "computerNamePrefix": "[variables('namingInfix')]",
