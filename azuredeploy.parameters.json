@@ -3,16 +3,16 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "vmSku": {
-        "value": "Standard_A0"
+        "value": "Standard_DS2_v2"
       },
       "scalityConnectImageURI": {
-        "value": ""
+        "value": "https://eedeploymentimage.blob.core.windows.net/images/osdisk_b4e215133c.vhd"
       },
       "vmssName": {
-        "value": "GEN-UNIQUE-33"
+        "value": "GEN-UNIQUE-34"
       },
       "instanceCount": {
-        "value": 1
+        "value": 2
       },
       "adminUsername": {
         "value": "ubuntu"

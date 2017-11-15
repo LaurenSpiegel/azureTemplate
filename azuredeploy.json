@@ -195,7 +195,7 @@
           "virtualMachineProfile": {
             "storageProfile": {
               "osDisk": {
-                "name": "vmsosdisk",
+                "name": "[concat('vmsosdisk', variables('namingInfix'))]",
                 "createOption": "FromImage",
                 "caching": "ReadOnly",
                 "osType": "Linux",
