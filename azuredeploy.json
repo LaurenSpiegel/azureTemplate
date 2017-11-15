@@ -198,7 +198,9 @@
                 "createOption": "FromImage",
                 "caching": "ReadOnly"
               },
-              "imageReference": "[parameters('scalityConnectImageURI')]"
+              "imageReference": {
+                "id": "/subscriptions/ddddcb62-904d-4e8a-80ed-f91cdc1685f7/resourceGroups/jesusvmtest/providers/Microsoft.Compute/images/scalityEnterpriseTest"
+              }
             },
             "osProfile": {
               "computerNamePrefix": "[variables('namingInfix')]",

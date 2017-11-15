@@ -6,10 +6,10 @@
         "value": "Standard_A0"
       },
       "scalityConnectImageURI": {
-        "value": "https://eedeploymentimage.blob.core.windows.net/vhds/osdisk_b4e215133c.vhd"
+        "value": "scalityEnterpriseTest"
       },
       "vmssName": {
-        "value": "GEN-UNIQUE-32"
+        "value": "GEN-UNIQUE-33"
       },
       "instanceCount": {
         "value": 1
