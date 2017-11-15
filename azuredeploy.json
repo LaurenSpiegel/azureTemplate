@@ -204,6 +204,22 @@
                 }
               }
             },
+            "extensionProfile": {
+              "extensions": [
+                {
+                  "name": "customScript",
+                  "properties": {
+                    "publisher": "Microsoft.Azure.Extensions",
+                    "type": "CustomScript",
+                    "typeHandlerVersion": "2.0",
+                    "autoUpgradeMinorVersion": true,
+                    "protectedSettings": {
+                      "commandToExecute": "sudo docker ps > testfile"
+                    }
+                  }
+                }
+              ]
+            },
             "osProfile": {
               "computerNamePrefix": "[variables('namingInfix')]",
               "adminUsername": "[parameters('adminUsername')]",

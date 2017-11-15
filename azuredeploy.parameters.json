@@ -9,7 +9,7 @@
         "value": "https://eedeploymentimage.blob.core.windows.net/images/osdisk_b4e215133c.vhd"
       },
       "vmssName": {
-        "value": "GEN-UNIQUE-34"
+        "value": "GEN-UNIQUE-35"
       },
       "instanceCount": {
         "value": 2
