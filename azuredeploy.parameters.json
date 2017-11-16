@@ -6,10 +6,10 @@
         "value": "Standard_DS2_v2"
       },
       "scalityConnectImageURI": {
-        "value": "https://eedeploymentimage.blob.core.windows.net/images/osdisk_b4e215133c.vhd"
+        "value": "https://givemeareferencetoavhd.vhd"
       },
       "vmssName": {
-        "value": "GEN-UNIQUE-35"
+        "value": "givemeauniquename"
       },
       "instanceCount": {
         "value": 2
@@ -17,8 +17,14 @@
       "adminUsername": {
         "value": "ubuntu"
       },
-      "adminPassword": {
-        "value": "GEN-PASSWORDmakeme4$ok"
+      "sshPublicKey": {
+        "value": "ssh-rsa give me a public key"
+      },
+      "storageAccountName": {
+        "value": "somestorageaccountname"
+      },
+      "storageAccountAccessKey": {
+        "value": "somestorageaccountnameaccesskey"
       }
     }
   }

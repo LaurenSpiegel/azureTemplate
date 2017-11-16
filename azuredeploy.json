@@ -4,7 +4,12 @@
     "parameters": {
       "vmSku": {
         "type": "string",
-        "defaultValue": "Standard_A1",
+        "defaultValue": "Standard_DS2_v2",
+        "allowedValues": [
+          "Standard_DS2_v2",
+          "Standard_DS3_v2",
+          "Standard_DS4_v2"
+        ],
         "metadata": {
           "description": "Size of VMs in the VM Scale Set."
         }
@@ -22,12 +27,27 @@
         },
         "maxLength": 61
       },
+      "storageAccountName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of your existing Azure Blob Storage Account where you would like the data saved."
+        },
+        "maxLength": 24
+      },
+      "storageAccountAccessKey": {
+        "type": "securestring",
+        "metadata": {
+          "description": "Access Key for your existing Azure Blob Storage Account."
+        },
+        "maxLength": 88
+      },
       "instanceCount": {
         "type": "int",
+        "defaultValue": 2,
         "metadata": {
-          "description": "Number of VM instances (100 or less)."
+          "description": "Number of VM instances (10 or less)."
         },
-        "maxValue": 100
+        "maxValue": 10
       },
       "adminUsername": {
         "type": "string",
@@ -35,10 +55,10 @@
           "description": "Admin username on all VMs."
         }
       },
-      "adminPassword": {
+      "sshPublicKey": {
         "type": "securestring",
         "metadata": {
-          "description": "Admin password on all VMs."
+          "description": "Your ssh public key."
         }
       }
     },
@@ -61,6 +81,7 @@
       "nicName": "[concat(variables('namingInfix'), 'nic')]",
       "ipConfigName": "[concat(variables('namingInfix'), 'ipconfig')]",
       "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/loadBalancerFrontEnd')]",
+      "sshKeyPath": "[concat('/home/',parameters('adminUsername'),'/.ssh/authorized_keys')]",
       "computeApiVersion": "2017-03-30",
       "networkApiVersion": "2017-04-01",
       "storageApiVersion": "2015-06-15",
@@ -126,7 +147,7 @@
           ],
           "loadBalancingRules": [
             {
-                "name": "testrule",
+                "name": "scalityrule",
                 "properties": {
                     "frontendIPConfiguration": {
                         "id": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]"
@@ -141,14 +162,14 @@
                         "id": "[concat(variables('lbID'), '/backendAddressPools/', variables('bePoolName'))]"
                     },
                     "probe": {
-                        "id": "[concat(variables('lbID'), '/probes/', 'testProbe')]"
+                        "id": "[concat(variables('lbID'), '/probes/', 'scalityprobe')]"
                     }
                 }
             }
         ],
         "probes": [
             {
-                "name": "testProbe",
+                "name": "scalityprobe",
                 "properties": {
                     "protocol": "Tcp",
                     "port": 22,
@@ -214,7 +235,7 @@
                     "typeHandlerVersion": "2.0",
                     "autoUpgradeMinorVersion": true,
                     "protectedSettings": {
-                      "commandToExecute": "sudo docker ps > testfile"
+                      "commandToExecute": "[concat('/var/scality/run.sh ', parameters('storageAccountName'), ' ', parameters('storageAccountAccessKey'), ' ', variables('longNamingInfix'), '.' , resourceGroup().location, '.cloudapp.azure.com')]"
                     }
                   }
                 }
@@ -223,7 +244,17 @@
             "osProfile": {
               "computerNamePrefix": "[variables('namingInfix')]",
               "adminUsername": "[parameters('adminUsername')]",
-              "adminPassword": "[parameters('adminPassword')]"
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": true,
+                "ssh": {
+                    "publicKeys": [
+                        {
+                            "path": "[variables('sshKeyPath')]",
+                            "keyData": "[parameters('sshPublicKey')]"
+                        }
+                    ]
+                }
+              }
             },
             "networkProfile": {
               "networkInterfaceConfigurations": [
